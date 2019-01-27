@@ -21,6 +21,7 @@
     z-index: 1001;
     box-sizing: border-box;
     padding: 20px;
+    cursor: initial;
 }
 
 .overlay
