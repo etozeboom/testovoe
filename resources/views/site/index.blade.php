@@ -10,7 +10,7 @@
                     @foreach($doors as $door)
                         <a id="d{{ $door->id}}" class="door btn">{{ $door->name}}
 
-                        <div class="modal{{ $door->id}} modal" >
+                        <div class="modal{{ $door->id}} modal @if (  (isset($doorId) ? $doorId : 0) ==$door->id) open  @endif" >
                             <form method="POST" action="{{ route('index') }}">
                                 @csrf
 
@@ -21,7 +21,7 @@
                                         <input  disabled="disabled" id="name{{ $door->id}}" type="name" class="form-control" name="name" value="{{  $request->user()->first()->name }}" required autofocus>
                                     </div>
                                 </div>
-
+                               
                                 <div class="form-group row justify-content-center">
                                     <label for="password" class="col-md-12 col-form-label text-md-center">{{ __('Password') }}</label>
 
@@ -35,7 +35,12 @@
                                         @endif
                                     </div>
                                 </div>
-
+                                @if (isset($status))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ $status }}
+                                    </div>
+                                @endif
+                               
                                 <div class="form-group row mb-0">
                                     <div class="col-md-8 offset-md-6">
                                         <button type="submit" class="btn btn-primary">
@@ -52,7 +57,7 @@
                     @endforeach
                 </div>
                
-                <div class="overlay"></div>
+                <div class="overlay {{ isset($doorId) ? 'open' : '' }}"></div>
             </div>
         </div>
     </div>

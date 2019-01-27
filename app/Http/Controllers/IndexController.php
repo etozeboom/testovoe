@@ -7,37 +7,32 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Door;
 use App\Role;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
     public function execute(Request $request) {
         
         echo User::find(1)->roles()->first()->name; 
+        $doors = Door::all();
 
         if($request->isMethod('post')) {
-			$messages = [
-			
-			'required' => "Поле :attribute обязательно к заполнению",
-			'email' => "Поле :attribute должно соответствовать email адресу"
-			
-			];
-			
-			$this->validate($request,[
-			
-			'name' => 'required|max:255',
-			'email' => 'required|email',
-			'text' => 'required'	
-					
-			], $messages);
-			
-			
-			$data = $request->all();
 			
 			
 			
-			if($result) {
-				return redirect()->route('home')->with('status', 'Email is send');
-			}
+            $data = $request->all();
+            //dump($request->user()->first()->password);
+            //dump($data['password']);
+			if (Hash::check($data['password'], $request->user()->first()->password)) {
+               $door_id = $data['door_id'];
+                return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => ' sd']);
+            }
+               
+            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $data['door_id'] , 'status' => 'неверный пароль']);
+			  
+			/*if($result) {
+				//return redirect()->route('index')->with('status', 'Email is send');
+            }*/
 			
 			
 		}
@@ -46,7 +41,7 @@ class IndexController extends Controller
 
 
 
-        $doors = Door::all();
+        
         return view('site.index',['doors'=>$doors, 'request'=> $request]);
         
 	}
