@@ -14,8 +14,40 @@ class IndexController extends Controller
         
         echo User::find(1)->roles()->first()->name; 
 
+        if($request->isMethod('post')) {
+			$messages = [
+			
+			'required' => "Поле :attribute обязательно к заполнению",
+			'email' => "Поле :attribute должно соответствовать email адресу"
+			
+			];
+			
+			$this->validate($request,[
+			
+			'name' => 'required|max:255',
+			'email' => 'required|email',
+			'text' => 'required'	
+					
+			], $messages);
+			
+			
+			$data = $request->all();
+			
+			
+			
+			if($result) {
+				return redirect()->route('home')->with('status', 'Email is send');
+			}
+			
+			
+		}
+
+
+
+
+
         $doors = Door::all();
-        return view('site.index',['doors'=>$doors]);
+        return view('site.index',['doors'=>$doors, 'request'=> $request]);
         
 	}
 }
