@@ -8,6 +8,6 @@
 
 @section('content')
 
-	
+    @include('admin.doors_content')
 
 @endsection
