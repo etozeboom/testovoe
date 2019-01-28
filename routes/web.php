@@ -13,6 +13,8 @@
 
 Route::match(['get','post'],'/', 'IndexController@execute')->name('index');
 
+Route::match(['get','post'],'/settings', 'SettingsController@execute')->name('settings');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

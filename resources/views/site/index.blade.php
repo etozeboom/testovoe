@@ -37,8 +37,8 @@
                                         @endif
                                     </div>
                                 </div>
-                                @if (isset($status) and (isset($doorId) ? $doorId : 0) ==$door->id)
-                                    <div class="alert alert-success" role="alert">
+                                @if (isset($status) and (isset($doorId) ? $doorId : 0) ==$door->id )
+                                    <div class="alert alert-{{ isset($danger) ? 'danger' : 'success' }}" role="alert">
                                         {{ $status }}
                                     </div>
                                 @endif

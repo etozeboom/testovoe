@@ -62,10 +62,10 @@ class IndexController extends Controller
                     
                     }
                 }
-                return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => 'доступа нет']);
+                return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => 'доступа нет', 'danger' => 1]);
             }
                
-            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $data['door_id'] , 'status' => 'неверный пароль']);
+            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $data['door_id'] , 'status' => 'неверный пароль', 'danger' => 1]);
 			  
 						
 			
