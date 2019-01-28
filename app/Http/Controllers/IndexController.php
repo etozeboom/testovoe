@@ -14,6 +14,8 @@ class IndexController extends Controller
 {
     public function execute(Request $request) {
         
+        
+
         $id = Auth::id();
 
         /*$roles = User::find($id)->roles; 

@@ -41,3 +41,15 @@
 {
     display: block;
 }
+
+.admin .menu
+{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.admin .menu a
+{
+    border:1px solid #000;
+    width: 30%;
+}
