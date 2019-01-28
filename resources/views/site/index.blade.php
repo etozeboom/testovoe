@@ -18,10 +18,12 @@
                                     <label for="name" class="col-md-12 col-form-label text-md-center">{{ __('Username') }}</label>
 
                                     <div class="col-md-8 align-self-center">
-                                        <input  disabled="disabled" id="name{{ $door->id}}" type="name" class="form-control" name="name" value="{{  $request->user()->first()->name }}" required autofocus>
+                                        <input  disabled="disabled" id="name{{ $door->id}}" type="name" class="form-control" name="name" @if (Auth::check()) value="{{  Auth::user()->name }}" @endif required autofocus>
                                     </div>
                                 </div>
-                               
+                                
+
+                                
                                 <div class="form-group row justify-content-center">
                                     <label for="password" class="col-md-12 col-form-label text-md-center">{{ __('Password') }}</label>
 
@@ -35,7 +37,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                @if (isset($status))
+                                @if (isset($status) and (isset($doorId) ? $doorId : 0) ==$door->id)
                                     <div class="alert alert-success" role="alert">
                                         {{ $status }}
                                     </div>

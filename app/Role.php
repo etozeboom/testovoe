@@ -15,6 +15,6 @@ class Role extends Model
     }
     
     public function doors() {
-		return $this->belongsToMany('App\Permission','permission_role');
+		return $this->belongsToMany('App\Door','permission_role','role_id','doors_id');
 	}
 }

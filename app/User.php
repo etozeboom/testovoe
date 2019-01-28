@@ -20,7 +20,9 @@ class User extends Authenticatable
     ];
     public function roles() {
 		return $this->belongsToMany('App\Role','role_user');
-	}
+    }
+    
+    
     /**
      * The attributes that should be hidden for arrays.
      *
