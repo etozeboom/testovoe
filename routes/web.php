@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin','middleware'=>['auth', 'checkAdmin']],function() {
-	
+	//Route::get('/','Admin\IndexController@index')->name('adminIndex');
 	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
     
     Route::group(['prefix'=>'doors'],function() {

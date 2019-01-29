@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 <div class="container "> 
     
     <!-- Title -->
@@ -22,4 +20,3 @@
 
     </div>	
 </div>
-@endsection
