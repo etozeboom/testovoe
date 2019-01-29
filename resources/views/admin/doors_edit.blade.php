@@ -7,7 +7,9 @@
 @endsection
 
 @section('content')
-
+    @php 
+        //dump(route('doorsEdit',array('page'=>$data['id'])));
+    @endphp
     <div class="wrapper container-fluid">
     {!! Form::open(['url' => route('doorsEdit',array('page'=>$data['id'])),'class'=>'form-horizontal','method'=>'POST','enctype'=>'multipart/form-data']) !!}
         <div class="form-group">

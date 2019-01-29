@@ -19,20 +19,20 @@ class PermissionsController extends Controller
 
             $data = $request->except('_token');          
             
-            foreach($roles as $value) {
-                if(isset($data[$value->id])) {
-                    $value->savePermissions($data[$value->id]);
+            foreach($roles as $role) {
+                if(isset($data[$role->id])) {
+                    $role->savePermissions($data[$role->id]);
                 }
                 
                 else {
-                    $value->savePermissions([]);
+                    $role->savePermissions([]);
                 }
             }
             
             //return ['status' => 'Права обновлены'];
 
             $request->session()->flash('status', 'permissions updates');
-			return view('admin.permissions',['doors'=>$doors, 'roles'=>$roles, 'request'=> $request, 'title' => 'edit permissions']);			
+			//return view('admin.permissions',['doors'=>$doors, 'roles'=>$roles, 'request'=> $request, 'title' => 'edit permissions']);			
 			
 		}       
 

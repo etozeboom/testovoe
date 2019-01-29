@@ -1,5 +1,5 @@
 
-<div style="margin:0px 50px 0px 50px;">   
+<div class='container' >   
 
 @if($doors)
  
@@ -8,9 +8,9 @@
             <tr>
                 <th>№ п/п</th>
                 <th>Имя</th>
-                <th>Дата создания</th>
+                <th>Date create</th>
                 
-                <th>Удалить</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
 	        		{!! Form::open(['url'=>route('doorsEdit',['door'=>$door->id]), 'class'=>'form-horizontal','method' => 'POST']) !!}
 
 	        			{{ method_field('DELETE') }}
-	        			{!! Form::button('Удалить',['class'=>'btn btn-danger','type'=>'submit']) !!}
+	        			{!! Form::button('Delete',['class'=>'btn btn-danger','type'=>'submit']) !!}
 	        			
 	        		{!! Form::close() !!}
         		</td>

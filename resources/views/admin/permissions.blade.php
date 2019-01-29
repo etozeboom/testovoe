@@ -8,7 +8,7 @@
 
 @section('content')
 
-<div id="content-page" class="content group">
+<div id="content-page" class="content group container">
 	<div class="hentry group">
 	
 	<h3 class="title_page">permissions</h3>
@@ -18,7 +18,7 @@
 		
 		<div class="short-table white">
 		
-			<table style="width:100%">
+			<table style="width:100%" class='table table-hover table-striped'>
 				
 				<thead>
 					
