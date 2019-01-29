@@ -33,18 +33,10 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'checkAdmin']],function
 		
 	});
 	
+
+	Route::match(['get','post'],'/permissions',['uses'=>'Admin\PermissionsController@execute','as'=>'permissions']);
 	
-	Route::group(['prefix'=>'permissions'],function() {
-		
-		Route::get('/',['uses'=>'Admin\PermissionsController@execute','as'=>'permission']);
-		
-		Route::match(['get','post'],'/add',['uses'=>'Admin\PermissionsController@add','as'=>'permissionsAdd']);
-		
-		Route::match(['get','post','delete'],'/edit/{permission}',['uses'=>'Admin\PermissionsController@edit','as'=>'permissionsEdit']);
-		
-	});
-	
-	
+
 	Route::group(['prefix'=>'users'],function() {
 		
 		Route::get('/',['uses'=>'Admin\UsersController@execute','as'=>'user']);
