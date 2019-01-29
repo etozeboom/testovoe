@@ -49,9 +49,11 @@
             <label for="roles" class="col-md-12 col-form-label text-md-center"> Role</label>
             <div class="col-md-8">
             @php
-                //dump($roles);
+                dump($user->roles->implode('id', ', '));
+                dump($user->roles->toArray());
+                dump([$user->roles()->first()->id,3]);
             @endphp
-				{!! Form::select('role_id', $roles, (isset($user)) ? $user->roles()->first()->id : null, ['multiple','required']) !!}
+				{!! Form::select('role_id[]', $roles, (isset($user)) ? $user->roles()->first()->id : null, ['multiple','required']) !!}
             </div>
         </div>
 		 
