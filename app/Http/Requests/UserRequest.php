@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+//use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -22,9 +23,10 @@ class UserRequest extends FormRequest
     
 	    $validator->sometimes('password', 'required|min:6|confirmed', function($input)
 	    {
-			
-			if(!empty($input->password) || ((empty($input->password) && $this->route()->getName() !== 'admin.users.update'))) {
-				return TRUE;
+			//dd($this->route()->getName());
+			if(!empty($input->password) || ((empty($input->password) && $this->route()->getName() !== 'usersUpdate'))) {
+                //dd($input);
+                return TRUE;
 			}
 			
 			return FALSE;
@@ -41,11 +43,12 @@ class UserRequest extends FormRequest
 
     public function rules()
     {
-        $id = (isset($this->route()->parameter('users')->id)) ? $this->route()->parameter('users')->id : '';
-		
+        $id = (isset($this->route()->parameter('user')->id)) ? $this->route()->parameter('user')->id : '';
+		//dd($id, $this->route()->parameter('user'));
 		return [
              'name' => 'required|max:255',
-			 'role_id' => 'required|integer',
+             'role_id' => 'required',
+             //'email' => ['required|email|max:255', Rule::unique('users')->ignore($id),],
              'email' => 'required|email|max:255|unique:users,email,'.$id
         ];
     }

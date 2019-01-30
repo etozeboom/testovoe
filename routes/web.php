@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth', 'checkAdmin']],function
 		Route::match(['get','post'],'/add',['uses'=>'Admin\UsersController@add','as'=>'usersAdd']);
 		
 		Route::match(['get','post','delete'],'/edit/{user}',['uses'=>'Admin\UsersController@edit','as'=>'usersEdit']);
-		
+		Route::patch('/edit/{user}',['uses'=>'Admin\UsersController@update','as'=>'usersUpdate']);
 	});
 	
 });

@@ -68,7 +68,7 @@ class UsersController extends Controller
 		
     }
     
-    public function edit(user $user,Request $request,UserRequest $userRequest) 
+    public function edit(user $user,Request $request) 
     {
 		
 		
@@ -85,24 +85,8 @@ class UsersController extends Controller
 		
 		if($request->isMethod('post')) {
 
-			$data = $request->all();
-
-            if(isset($data['password'])) {
-                $data['password'] = bcrypt($data['password']);
-            }
-            else
-            {
-                $data = $request->except(['_token','password']);
-            }
-
-            $user->fill($data)->update();
-
-            $user->roles()->sync($data['role_id']);
-            
-            $request->session()->flash('status', 'user update');
-            $users = User::all();
-            return view('admin.users',['title' => 'users', 'users' => $users]);
 			
+			$this->update();
 		}
 
 		$old = $user->toArray();
@@ -124,5 +108,25 @@ class UsersController extends Controller
 		
     }
     
-    
+    public function update(user $user,Request $request,UserRequest $userRequest) 
+    {
+
+        $data = $request->all();
+
+        if(isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
+        else
+        {
+            $data = $request->except(['_token','password']);
+        }
+
+        $user->fill($data)->update();
+
+        $user->roles()->sync($data['role_id']);
+        
+        $request->session()->flash('status', 'user update');
+        $users = User::all();
+        return view('admin.users',['title' => 'users', 'users' => $users]);
+    }
 }
