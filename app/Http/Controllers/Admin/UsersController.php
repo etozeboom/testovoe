@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\Http\Requests\UserRequest;
 
 class UsersController extends Controller
 {
@@ -39,9 +40,9 @@ class UsersController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ]);
-            dump($request);
-            dump($data);
-           dump($data['role_id']);
+            //dump($request);
+            //dump($data);
+           //dump($data['role_id']);
             if($user) {
                 $user->roles()->attach($data['role_id']);
             }
@@ -67,7 +68,8 @@ class UsersController extends Controller
 		
     }
     
-    public function edit(user $user,Request $request) {
+    public function edit(user $user,Request $request,UserRequest $userRequest) 
+    {
 		
 		
 		/*$user = user::find($id);*/
@@ -82,25 +84,24 @@ class UsersController extends Controller
 		}
 		
 		if($request->isMethod('post')) {
-            dd($request);
-            /*$this->validate($request, [
-                'name' => 'required|max:255',
-                'email' => 'required|email|unique:users|string|max:255',
-                'password' => 'required|string|min:6|confirmed',
-            ]);
 
 			$data = $request->all();
-		
+
             if(isset($data['password'])) {
                 $data['password'] = bcrypt($data['password']);
             }
-            
+            else
+            {
+                $data = $request->except(['_token','password']);
+            }
+
             $user->fill($data)->update();
-            $user->roles()->sync([$data['role_id']]);
+
+            $user->roles()->sync($data['role_id']);
             
             $request->session()->flash('status', 'user update');
             $users = User::all();
-            return view('admin.users',['title' => 'users', 'users' => $users]);*/
+            return view('admin.users',['title' => 'users', 'users' => $users]);
 			
 		}
 
@@ -112,9 +113,16 @@ class UsersController extends Controller
                 $returnRoles[$role->id] = $role->name;
                 return $returnRoles;
             }, []);
-			return view('admin.users_add',['roles'=>$roles, 'title' => 'new user', 'data' => $old,'user'=>$user]);		
+
+            $rolesId =  $user->roles->pluck('id');
+            //dump($user->roles);
+            $rolesId=$rolesId->all();
+            //dump($rolesId);
+			return view('admin.users_add',['roles'=>$roles, 'title' => 'new user', 'data' => $old,'user'=>$user, 'rolesId' => $rolesId]);		
 			
 		}
 		
-	}
+    }
+    
+    
 }

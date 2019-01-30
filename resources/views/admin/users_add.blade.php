@@ -49,20 +49,15 @@
             <label for="roles" class="col-md-12 col-form-label text-md-center"> Role</label>
             <div class="col-md-8">
             @php
-                dump($user->roles->implode('id', ', '));
-                dump($user->roles->toArray());
-                dump([$user->roles()->first()->id,3]);
+                //dump($user->roles);
+                //dump($user->roles->implode('id', ', '));
+                //dump($user->roles->toArray());
+                //dump([$user->roles()->first()->id,3]);
             @endphp
-				{!! Form::select('role_id[]', $roles, (isset($user)) ? $user->roles()->first()->id : null, ['multiple','required']) !!}
+				{!! Form::select('role_id[]', $roles, (isset($user)) ? $rolesId : null, ['multiple','required']) !!}
             </div>
         </div>
-		 
-		
-		@if(isset($user->id))
-			<input type="hidden" name="_method" value="PUT">		
-		
-		@endif
-
+        
 		<div class="form-group row mb-0">
             <div class="col-md-8 offset-md-6">
 			    {!! Form::button('Save', ['class' => 'btn btn-the-salmon-dance-3 btn-primary','type'=>'submit']) !!}			
