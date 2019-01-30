@@ -92,9 +92,12 @@
                 </div>
             @endif
 
-            @if (session('status'))
+            @if (session('status') or isset($status))
                 <div class="alert alert-success">
                     {{ session('status') }}
+                    @isset($status)
+                      {{ $status }}
+                    @endisset
                 </div>
             @endif
         </header>

@@ -49,9 +49,9 @@ class UsersController extends Controller
 
             
             
-            $request->session()->flash('status', 'user added');
+            //$request->session()->flash('status', 'user added');
             $users = User::all();
-            return view('admin.users',['title' => 'users', 'users' => $users]);
+            return view('admin.users',['title' => 'users', 'users' => $users, 'status'=> 'user added']);
         }
     	
         if(view()->exists('admin.users_add')) 
@@ -78,9 +78,9 @@ class UsersController extends Controller
             //dd($user);
             $user->roles()->detach();
 			$user->delete();
-			$request->session()->flash('status', 'user deleted');
+			//$request->session()->flash('status', 'user deleted');
             $users = User::all();
-            return view('admin.users',['title' => 'users', 'users' => $users]);
+            return view('admin.users',['title' => 'users', 'users' => $users, 'status'=> 'user deleted']);
 		}
 		
 		if($request->isMethod('post')) {
@@ -125,8 +125,8 @@ class UsersController extends Controller
 
         $user->roles()->sync($data['role_id']);
         
-        $request->session()->flash('status', 'user update');
+        //$request->session()->flash('status', 'user update');
         $users = User::all();
-        return view('admin.users',['title' => 'users', 'users' => $users]);
+        return view('admin.users',['title' => 'users', 'users' => $users, 'status'=> 'user update']);
     }
 }

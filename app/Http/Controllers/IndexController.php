@@ -59,15 +59,15 @@ class IndexController extends Controller
                         //dump($door);
                         if($door->id == $door_id)
                         {
-                            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => 'доступ есть']);
+                            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => 'there is access']);
                         }
                     
                     }
                 }
-                return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => 'доступа нет', 'danger' => 1]);
+                return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $door_id, 'status' => 'no access', 'danger' => 1]);
             }
                
-            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $data['door_id'] , 'status' => 'неверный пароль', 'danger' => 1]);
+            return view('site.index',['doors'=>$doors, 'request'=> $request, 'doorId' => $data['door_id'] , 'status' => 'Wrong password', 'danger' => 1]);
 			  
 						
 			
